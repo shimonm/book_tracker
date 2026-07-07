@@ -1,0 +1,26 @@
+<h1>Book Tracker</h1>
+
+<% if notice %><p class="flash notice"><%= notice %></p><% end %>
+<% if alert %><p class="flash alert"><%= alert %></p><% end %>
+
+<table>
+  <thead>
+    <tr><th>Title</th><th>Author</th><th>Status</th><th></th></tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.author %></td>
+        <td><%= book.checked_out? ? "Checked out" : "Available" %></td>
+        <td>
+          <% if book.checked_out? %>
+            <%= button_to "Return", check_in_book_path(book) %>
+          <% else %>
+            <%= button_to "Check out", check_out_book_path(book) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
